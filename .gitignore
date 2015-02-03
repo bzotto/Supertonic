@@ -2,11 +2,11 @@
 *.swp
 *~.nib
 
-proj/Supertonic.xcodeproj/*.pbxuser
-proj/Supertonic.xcodeproj/*.perspective
-proj/Supertonic.xcodeproj/*.perspectivev3
-proj/Supertonic.xcodeproj/*.mode1v3
-proj/Supertonic.xcodeproj/*.mode2v3
-proj/Supertonic.xcodeproj/*.mode2v3
-proj/Supertonic.xcodeproj/project.xcworkspace/xcuserdata/*
-proj/Supertonic.xcodeproj/xcuserdata/ben.xcuserdatad/xcdebugger/*
+Supertonic.xcodeproj/*.pbxuser
+Supertonic.xcodeproj/*.perspective
+Supertonic.xcodeproj/*.perspectivev3
+Supertonic.xcodeproj/*.mode1v3
+Supertonic.xcodeproj/*.mode2v3
+Supertonic.xcodeproj/*.mode2v3
+Supertonic.xcodeproj/project.xcworkspace/xcuserdata/*
+Supertonic.xcodeproj/xcuserdata/ben.xcuserdatad/xcdebugger/*
