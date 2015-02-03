@@ -16,7 +16,7 @@
 @end
 
 @implementation Note
-+ (Note *)noteWithString:(NSString *)string
++ (Note *)noteFromString:(NSString *)string
 {
     // expect up to three characters.
     if (string.length > 3 || string.length < 1) {
@@ -35,7 +35,7 @@
         default: return nil;
     }
     // accidental
-    Accidental accidental = Accidental_Natural;
+    Accidental accidental = AccidentalNatural;
     for (int i = 1; i < string.length; i++) {
         switch([string characterAtIndex:i]) {
             case 'b': accidental--; break;
@@ -57,42 +57,42 @@
     return self;
 }
 
-- (Semitone)semitone
+- (Pitch)canonicalPitch
 {
     // Start by mapping the base note onto its semitone.
-    int semitone;
+    int pitch;
     switch (self.noteName) {
         case NoteName_C:
-            semitone = Semitone_C;
+            pitch = Pitch_C;
             break;
         case NoteName_D:
-            semitone = Semitone_D;
+            pitch = Pitch_D;
             break;
         case NoteName_E:
-            semitone = Semitone_E;
+            pitch = Pitch_E;
             break;
         case NoteName_F:
-            semitone = Semitone_F;
+            pitch = Pitch_F;
             break;
         case NoteName_G:
-            semitone = Semitone_G;
+            pitch = Pitch_G;
             break;
         case NoteName_A:
-            semitone = Semitone_A;
+            pitch = Pitch_A;
             break;
         case NoteName_B:
-            semitone = Semitone_B;
+            pitch = Pitch_B;
             break;
     }
     // Adjust it by the accidental, then mod it back into the octave.
-    semitone += self.accidental;
-    if (semitone < 0) {
-        semitone = SEMITONES_IN_OCTAVE - semitone;
+    pitch += self.accidental;
+    if (pitch < 0) {
+        pitch = SEMITONES_IN_OCTAVE - pitch;
     }
-    if (semitone > Semitone_B) {
-        semitone -= SEMITONES_IN_OCTAVE;
+    if (pitch > Pitch_B) {
+        pitch -= SEMITONES_IN_OCTAVE;
     }
-    return semitone;
+    return pitch;
 }
 
 - (NSString *)string
@@ -123,16 +123,16 @@
     }
     
     switch (self.accidental) {
-        case Accidental_DoubleFlat:
+        case AccidentalDoubleFlat:
             [string appendString:@"bb"];
             break;
-        case Accidental_Flat:
+        case AccidentalFlat:
             [string appendString:@"b"];
             break;
-        case Accidental_Sharp:
+        case AccidentalSharp:
             [string appendString:@"#"];
             break;
-        case Accidental_DoubleSharp:
+        case AccidentalDoubleSharp:
             [string appendString:@"##"];
             break;
         default:
@@ -140,5 +140,10 @@
     }
     
     return string;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; %@>", [self class], self, self.string];
 }
 @end

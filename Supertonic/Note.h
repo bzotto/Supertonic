@@ -7,21 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Interval.h"
 
 typedef enum {
-    Semitone_C,
-    Semitone_CSharpDFlat,
-    Semitone_D,
-    Semitone_DSharpEFlat,
-    Semitone_E,
-    Semitone_F,
-    Semitone_FSharpGFlat,
-    Semitone_G,
-    Semitone_GSharpAFlat,
-    Semitone_A,
-    Semitone_ASharpBFlat,
-    Semitone_B,
-} Semitone;
+    Pitch_C,
+    Pitch_CSharpDFlat,
+    Pitch_D,
+    Pitch_DSharpEFlat,
+    Pitch_E,
+    Pitch_F,
+    Pitch_FSharpGFlat,
+    Pitch_G,
+    Pitch_GSharpAFlat,
+    Pitch_A,
+    Pitch_ASharpBFlat,
+    Pitch_B,
+} Pitch;
 
 typedef enum {
     NoteName_C,
@@ -34,18 +35,18 @@ typedef enum {
 } NoteName;
 
 typedef enum {
-    Accidental_DoubleFlat  = -2,
-    Accidental_Flat        = -1,
-    Accidental_Natural     = 0,
-    Accidental_Sharp       = 1,
-    Accidental_DoubleSharp = 2
+    AccidentalDoubleFlat  = -2,
+    AccidentalFlat        = -1,
+    AccidentalNatural     = 0,
+    AccidentalSharp       = 1,
+    AccidentalDoubleSharp = 2
 } Accidental;
 
 @interface Note : NSObject
 @property (nonatomic, readonly) NoteName noteName;
 @property (nonatomic, readonly) Accidental accidental;
-+ (Note *)noteWithString:(NSString *)name;
++ (Note *)noteFromString:(NSString *)name;
 - (id)initWithNoteName:(NoteName)name accidental:(Accidental)accidental;
-- (Semitone)semitone;
+- (Pitch)canonicalPitch;
 - (NSString *)string;
 @end

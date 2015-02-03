@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B5D0AAE51A7874A6001945E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D0AAE41A7874A6001945E4 /* main.m */; };
 		B5D0AAED1A7874D7001945E4 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D0AAEC1A7874D7001945E4 /* Note.m */; };
+		B5D0AAF01A787B98001945E4 /* Interval.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D0AAEF1A787B98001945E4 /* Interval.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		B5D0AAE41A7874A6001945E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B5D0AAEB1A7874D7001945E4 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		B5D0AAEC1A7874D7001945E4 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		B5D0AAEE1A787B98001945E4 /* Interval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interval.h; sourceTree = "<group>"; };
+		B5D0AAEF1A787B98001945E4 /* Interval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Interval.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,8 @@
 				B5D0AAE41A7874A6001945E4 /* main.m */,
 				B5D0AAEB1A7874D7001945E4 /* Note.h */,
 				B5D0AAEC1A7874D7001945E4 /* Note.m */,
+				B5D0AAEE1A787B98001945E4 /* Interval.h */,
+				B5D0AAEF1A787B98001945E4 /* Interval.m */,
 			);
 			path = Supertonic;
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 			files = (
 				B5D0AAE51A7874A6001945E4 /* main.m in Sources */,
 				B5D0AAED1A7874D7001945E4 /* Note.m in Sources */,
+				B5D0AAF01A787B98001945E4 /* Interval.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
