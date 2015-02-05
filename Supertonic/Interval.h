@@ -19,7 +19,7 @@ typedef enum {
 @interface Interval : NSObject
 @property (nonatomic, readonly) int number;
 @property (nonatomic, readonly) IntervalQuality quality;
-+ (Interval *)intervalFromString:(NSString *)string;
++ (Interval *)intervalWithName:(NSString *)name;
 - (int)semitones;
 - (NSString *)name;
 @end

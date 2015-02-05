@@ -17,15 +17,15 @@
 @end
 
 @implementation Note
-+ (Note *)noteFromString:(NSString *)string
++ (Note *)noteWithName:(NSString *)name
 {
     // expect up to three characters.
-    if (string.length > 3 || string.length < 1) {
+    if (name.length > 3 || name.length < 1) {
         return nil;
     }
     NaturalNote natural;
     // base note
-    switch ([string characterAtIndex:0]) {
+    switch ([name characterAtIndex:0]) {
         case 'C': natural = NaturalNote_C; break;
         case 'D': natural = NaturalNote_D; break;
         case 'E': natural = NaturalNote_E; break;
@@ -37,8 +37,8 @@
     }
     // accidental
     Accidental accidental = AccidentalNatural;
-    for (int i = 1; i < string.length; i++) {
-        switch([string characterAtIndex:i]) {
+    for (int i = 1; i < name.length; i++) {
+        switch([name characterAtIndex:i]) {
             case 'b': accidental--; break;
             case '#': accidental++; break;
             default: return nil;

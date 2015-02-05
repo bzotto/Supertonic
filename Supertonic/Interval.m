@@ -14,28 +14,28 @@
 @end
 
 @implementation Interval
-+ (Interval *)intervalFromString:(NSString *)string
++ (Interval *)intervalWithName:(NSString *)name
 {
-    if (string.length != 2) {
-        NSLog(@"interval string must be two characters, failed to parse '%@'", string);
+    if (name.length != 2) {
+        NSLog(@"interval string must be two characters, failed to parse '%@'", name);
         return nil;
     }
     
     IntervalQuality quality;
-    switch ([string characterAtIndex:0]) {
+    switch ([name characterAtIndex:0]) {
         case 'P': quality = IntervalQualityPerfect; break;
         case 'M': quality = IntervalQualityMajor; break;
         case 'm': quality = IntervalQualityMinor; break;
         case 'A': quality = IntervalQualityAugmented; break;
         case 'd': quality = IntervalQualityDiminished; break;
         default:
-            NSLog(@"unknown interval quality '%@'", [string substringToIndex:1]);
+            NSLog(@"unknown interval quality '%@'", [name substringToIndex:1]);
             return nil;
     }
     
-    int number = [[string substringFromIndex:1] intValue];
+    int number = [[name substringFromIndex:1] intValue];
     if (number <= 0 || number > 8) {
-        NSLog(@"unknown interval number '%@'", [string substringFromIndex:1]);
+        NSLog(@"unknown interval number '%@'", [name substringFromIndex:1]);
         return nil;
     }
     

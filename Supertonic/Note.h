@@ -45,7 +45,7 @@ typedef enum {
 @interface Note : NSObject
 @property (nonatomic, readonly) NaturalNote natural;
 @property (nonatomic, readonly) Accidental accidental;
-+ (Note *)noteFromString:(NSString *)name;
++ (Note *)noteWithName:(NSString *)name;
 - (id)initWithNaturalNote:(NaturalNote)naturalNote accidental:(Accidental)accidental;
 - (Pitch)canonicalPitch;
 - (Note *)noteByAddingInterval:(Interval *)interval;
