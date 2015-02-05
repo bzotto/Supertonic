@@ -12,7 +12,7 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        NSArray * notes = @[ @"C", @"Db", @"F", @"G", @"A", @"Cbb"]; // Cbb doesn't work
+        NSArray * notes = @[ @"C", @"Db", @"F", @"G", @"A", @"Cbb", @"E#"]; 
         for (NSString * notename in notes) {
             Note * note = [Note noteWithName:notename];
             NSLog(@"%@ major: %@ %@ %@ %@ %@ %@ %@ %@", note.name,
