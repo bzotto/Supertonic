@@ -12,13 +12,18 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-
-        Note * note1 = [Note noteFromString:@"Bb"];
-        Note * note2 = [Note noteFromString:@"A#"];
-        Interval * interval = [Interval intervalFromString:@"m2"];
-        NSLog(@"Note1: %@ Note2: %@ Interval: %@", note1.string, note2.string, interval.string);
-        if (note1.canonicalPitch != note2.canonicalPitch) {
-            NSLog(@"Mismatched canonical pitch");
+        NSArray * notes = @[ @"C", @"Db", @"F", @"G", @"A", @"Cbb"]; // Cbb doesn't work
+        for (NSString * notename in notes) {
+            Note * note = [Note noteFromString:notename];
+            NSLog(@"%@ major: %@ %@ %@ %@ %@ %@ %@ %@", note.name,
+                  [[note noteByAddingInterval:[Interval intervalFromString:@"P1"]] name],
+                  [[note noteByAddingInterval:[Interval intervalFromString:@"M2"]] name],
+                  [[note noteByAddingInterval:[Interval intervalFromString:@"M3"]] name],
+                  [[note noteByAddingInterval:[Interval intervalFromString:@"P4"]] name],
+                  [[note noteByAddingInterval:[Interval intervalFromString:@"P5"]] name],
+                  [[note noteByAddingInterval:[Interval intervalFromString:@"M6"]] name],
+                  [[note noteByAddingInterval:[Interval intervalFromString:@"M7"]] name],
+                  [[note noteByAddingInterval:[Interval intervalFromString:@"P8"]] name]);
         }
     }
     return 0;

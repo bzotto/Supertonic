@@ -8,10 +8,11 @@
 
 #import "Note.h"
 
-#define SEMITONES_IN_OCTAVE 12
+#define SEMITONES_IN_OCTAVE     12
+#define NATURAL_NOTES_IN_OCTAVE 7
 
 @interface Note ()
-@property (nonatomic, assign) NoteName noteName;
+@property (nonatomic, assign) NaturalNote natural;
 @property (nonatomic, assign) Accidental accidental;
 @end
 
@@ -22,16 +23,16 @@
     if (string.length > 3 || string.length < 1) {
         return nil;
     }
-    NoteName name;
+    NaturalNote natural;
     // base note
     switch ([string characterAtIndex:0]) {
-        case 'C': name = NoteName_C; break;
-        case 'D': name = NoteName_D; break;
-        case 'E': name = NoteName_E; break;
-        case 'F': name = NoteName_F; break;
-        case 'G': name = NoteName_G; break;
-        case 'A': name = NoteName_A; break;
-        case 'B': name = NoteName_B; break;
+        case 'C': natural = NaturalNote_C; break;
+        case 'D': natural = NaturalNote_D; break;
+        case 'E': natural = NaturalNote_E; break;
+        case 'F': natural = NaturalNote_F; break;
+        case 'G': natural = NaturalNote_G; break;
+        case 'A': natural = NaturalNote_A; break;
+        case 'B': natural = NaturalNote_B; break;
         default: return nil;
     }
     // accidental
@@ -44,14 +45,20 @@
         }
     }
     
-    return [[Note alloc] initWithNoteName:name accidental:accidental];
+    return [[Note alloc] initWithNaturalNote:natural accidental:accidental];
 }
 
-- (id)initWithNoteName:(NoteName)name accidental:(Accidental)accidental
+- (id)initWithNaturalNote:(NaturalNote)natural accidental:(Accidental)accidental
 {
+    natural = natural % NATURAL_NOTES_IN_OCTAVE;
+    if (accidental < AccidentalDoubleFlat || accidental > AccidentalDoubleSharp) {
+        NSLog(@"Invalid accidental.");
+        return nil;
+    }
+    
     self = [super init];
     if (self) {
-        self.noteName = name;
+        self.natural = natural;
         self.accidental = accidental;
     }
     return self;
@@ -61,33 +68,33 @@
 {
     // Start by mapping the base note onto its semitone.
     int pitch;
-    switch (self.noteName) {
-        case NoteName_C:
+    switch (self.natural) {
+        case NaturalNote_C:
             pitch = Pitch_C;
             break;
-        case NoteName_D:
+        case NaturalNote_D:
             pitch = Pitch_D;
             break;
-        case NoteName_E:
+        case NaturalNote_E:
             pitch = Pitch_E;
             break;
-        case NoteName_F:
+        case NaturalNote_F:
             pitch = Pitch_F;
             break;
-        case NoteName_G:
+        case NaturalNote_G:
             pitch = Pitch_G;
             break;
-        case NoteName_A:
+        case NaturalNote_A:
             pitch = Pitch_A;
             break;
-        case NoteName_B:
+        case NaturalNote_B:
             pitch = Pitch_B;
             break;
     }
     // Adjust it by the accidental, then mod it back into the octave.
     pitch += self.accidental;
     if (pitch < 0) {
-        pitch = SEMITONES_IN_OCTAVE - pitch;
+        pitch += SEMITONES_IN_OCTAVE;
     }
     if (pitch > Pitch_B) {
         pitch -= SEMITONES_IN_OCTAVE;
@@ -95,29 +102,69 @@
     return pitch;
 }
 
-- (NSString *)string
+- (Note *)noteByAddingInterval:(Interval *)interval
+{
+    // Start by finding the natural note name we're looking for. That will be
+    // the current note name, with the interval's number added to it. This MUST
+    // be the natural note, regardless of how many accidentals need to be applied.
+    // Remember whether we overflowed the octave to get there.
+    BOOL overflow = NO;
+    NaturalNote natural = self.natural + (interval.number - 1);
+    if (natural > NaturalNote_B) {
+        overflow = YES;
+        natural = natural % NATURAL_NOTES_IN_OCTAVE;
+    }
+    
+    // Next create a temporary note that represents this natural note with no accidentals
+    // applied.
+    Note * temp = [[Note alloc] initWithNaturalNote:natural accidental:AccidentalNatural];
+    Pitch naturalPitch = [temp canonicalPitch];
+    // If we're building this based on the next octave up, apply an octave's worth of
+    // semitones to get us back into range.
+    if (overflow) {
+        naturalPitch += SEMITONES_IN_OCTAVE;
+    }
+    
+    // Find the target pitch we're looking for, which is our canonical pitch incremented
+    // by the number of semitones in the interval. Our (named) result must have this
+    // pitch. This computation is not done mod an octave for simplicity, so targetPitch
+    // may not look meaningful in the debugger if we're above the first octave.
+    Pitch targetPitch = [self canonicalPitch] + [interval semitones];
+    
+    // We know the natural note name that the result must have, and we know the pitch
+    // that the result must have. We just need to calculate which accidental gets us
+    // from the former to the latter. Do this by computing the difference between the
+    // pitches.
+    int pitchDifference = naturalPitch - targetPitch;
+
+    // The result note is the natural note modulated by the accidental (inverse of the
+    // pitch difference we just computed).
+    return [[Note alloc] initWithNaturalNote:natural accidental:(pitchDifference * -1)];
+}
+
+- (NSString *)name
 {
     NSMutableString * string = [NSMutableString string];
-    switch (self.noteName) {
-        case NoteName_C:
+    switch (self.natural) {
+        case NaturalNote_C:
             [string appendString:@"C"];
             break;
-        case NoteName_D:
+        case NaturalNote_D:
             [string appendString:@"D"];
             break;
-        case NoteName_E:
+        case NaturalNote_E:
             [string appendString:@"E"];
             break;
-        case NoteName_F:
+        case NaturalNote_F:
             [string appendString:@"F"];
             break;
-        case NoteName_G:
+        case NaturalNote_G:
             [string appendString:@"G"];
             break;
-        case NoteName_A:
+        case NaturalNote_A:
             [string appendString:@"A"];
             break;
-        case NoteName_B:
+        case NaturalNote_B:
             [string appendString:@"B"];
             break;
     }
@@ -144,6 +191,6 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; %@>", [self class], self, self.string];
+    return [NSString stringWithFormat:@"<%@: %p; %@>", [self class], self, self.name];
 }
 @end

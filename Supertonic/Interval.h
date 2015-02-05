@@ -21,5 +21,5 @@ typedef enum {
 @property (nonatomic, readonly) IntervalQuality quality;
 + (Interval *)intervalFromString:(NSString *)string;
 - (int)semitones;
-- (NSString *)string;
+- (NSString *)name;
 @end

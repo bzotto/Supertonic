@@ -49,7 +49,7 @@
         self.number = number;
         self.quality = quality;
         if ([self semitones] < 0) {
-            NSLog(@"Invalid interval %@", [self string]);
+            NSLog(@"Invalid interval %@", [self name]);
             return nil;
         }
     }
@@ -135,7 +135,7 @@
     return -1;
 }
 
-- (NSString *)string
+- (NSString *)name
 {
     NSString * qualityString = nil;
     switch (self.quality) {
@@ -150,6 +150,6 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; %@>", [self class], self, self.string];
+    return [NSString stringWithFormat:@"<%@: %p; %@>", [self class], self, self.name];
 }
 @end

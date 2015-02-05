@@ -25,14 +25,14 @@ typedef enum {
 } Pitch;
 
 typedef enum {
-    NoteName_C,
-    NoteName_D,
-    NoteName_E,
-    NoteName_F,
-    NoteName_G,
-    NoteName_A,
-    NoteName_B
-} NoteName;
+    NaturalNote_C,
+    NaturalNote_D,
+    NaturalNote_E,
+    NaturalNote_F,
+    NaturalNote_G,
+    NaturalNote_A,
+    NaturalNote_B
+} NaturalNote;
 
 typedef enum {
     AccidentalDoubleFlat  = -2,
@@ -43,10 +43,11 @@ typedef enum {
 } Accidental;
 
 @interface Note : NSObject
-@property (nonatomic, readonly) NoteName noteName;
+@property (nonatomic, readonly) NaturalNote natural;
 @property (nonatomic, readonly) Accidental accidental;
 + (Note *)noteFromString:(NSString *)name;
-- (id)initWithNoteName:(NoteName)name accidental:(Accidental)accidental;
+- (id)initWithNaturalNote:(NaturalNote)naturalNote accidental:(Accidental)accidental;
 - (Pitch)canonicalPitch;
-- (NSString *)string;
+- (Note *)noteByAddingInterval:(Interval *)interval;
+- (NSString *)name;
 @end
