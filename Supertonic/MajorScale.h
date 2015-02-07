@@ -7,7 +7,8 @@
 //
 
 #import "Scale.h"
+@class NaturalMinorScale;
 
 @interface MajorScale : Scale
-
+- (NaturalMinorScale *)relativeMinorScale;
 @end

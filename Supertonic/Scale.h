@@ -23,5 +23,5 @@
 - (id)initWithTonic:(Note *)tonic;
 - (NSString *)name;
 - (int)degreeCount;
-- (Note *)noteForDegree:(int)degree;
+- (Note *)noteForDegree:(int)degree;  // Degrees are ONE-INDEXED. e.g. 1st degree is the tonic.
 @end

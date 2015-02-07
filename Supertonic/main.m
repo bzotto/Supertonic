@@ -17,11 +17,12 @@ int main(int argc, const char * argv[]) {
         NSArray * notes = @[ @"C", @"Db", @"F", @"G", @"A"];
         for (NSString * notename in notes) {
             Note * note = [Note noteWithName:notename];
-            Scale * scale = [NaturalMinorScale scaleWithTonic:note];
+            MajorScale * scale = [MajorScale scaleWithTonic:note];
+            Scale * relativeMinor = [scale relativeMinorScale];
             NSMutableString * str = [NSMutableString string];
-            [str appendFormat:@"%@: ", scale.name];
-            for (int i = 0; i < scale.degreeCount; i++) {
-                [str appendFormat:@"%@ ", [scale noteForDegree:i].name];
+            [str appendFormat:@"%@: ", relativeMinor.name];
+            for (int i = 1; i <= relativeMinor.degreeCount; i++) {
+                [str appendFormat:@"%@ ", [relativeMinor noteForDegree:i].name];
             }
             NSLog(@"%@", str);
         }

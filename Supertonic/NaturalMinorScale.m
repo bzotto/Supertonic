@@ -7,6 +7,7 @@
 //
 
 #import "NaturalMinorScale.h"
+#import "MajorScale.h"
 
 @interface NaturalMinorScale ()
 @property (nonatomic, strong) NSArray * scaleNotes;
@@ -33,7 +34,7 @@
 
 - (NSString *)name
 {
-    return [NSString stringWithFormat:@"%@ Minor", self.tonic.name];
+    return [NSString stringWithFormat:@"%@ minor", self.tonic.name];
 }
 
 - (int)degreeCount
@@ -43,6 +44,16 @@
 
 - (Note *)noteForDegree:(int)degree
 {
-    return [self.scaleNotes objectAtIndex:degree];
+    if (degree <= 0 || degree > [self degreeCount]) {
+        return nil;
+    }
+    // Degrees are traditionally 1-indexed.
+    return [self.scaleNotes objectAtIndex:(degree-1)];
+}
+
+- (MajorScale *)relativeMajorScale
+{
+    // Relative major is built from the 3rd degree of any major scale.
+    return [MajorScale scaleWithTonic:[self noteForDegree:3]];
 }
 @end
