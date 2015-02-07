@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B58E85591A858C5E0089A15F /* Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = B58E85581A858C5E0089A15F /* Scale.m */; };
+		B58E855D1A858CEC0089A15F /* MajorScale.m in Sources */ = {isa = PBXBuildFile; fileRef = B58E855C1A858CEC0089A15F /* MajorScale.m */; };
+		B58E85601A8590D80089A15F /* NaturalMinorScale.m in Sources */ = {isa = PBXBuildFile; fileRef = B58E855F1A8590D80089A15F /* NaturalMinorScale.m */; };
 		B5D0AAE51A7874A6001945E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D0AAE41A7874A6001945E4 /* main.m */; };
 		B5D0AAED1A7874D7001945E4 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D0AAEC1A7874D7001945E4 /* Note.m */; };
 		B5D0AAF01A787B98001945E4 /* Interval.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D0AAEF1A787B98001945E4 /* Interval.m */; };
@@ -25,6 +28,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B58E85571A858C5E0089A15F /* Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scale.h; sourceTree = "<group>"; };
+		B58E85581A858C5E0089A15F /* Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scale.m; sourceTree = "<group>"; };
+		B58E855B1A858CEC0089A15F /* MajorScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MajorScale.h; sourceTree = "<group>"; };
+		B58E855C1A858CEC0089A15F /* MajorScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MajorScale.m; sourceTree = "<group>"; };
+		B58E855E1A8590D80089A15F /* NaturalMinorScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaturalMinorScale.h; sourceTree = "<group>"; };
+		B58E855F1A8590D80089A15F /* NaturalMinorScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaturalMinorScale.m; sourceTree = "<group>"; };
 		B5D0AAE11A7874A6001945E4 /* Supertonic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Supertonic; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D0AAE41A7874A6001945E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B5D0AAEB1A7874D7001945E4 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
@@ -44,6 +53,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B58E855A1A858CDE0089A15F /* Scales */ = {
+			isa = PBXGroup;
+			children = (
+				B58E855B1A858CEC0089A15F /* MajorScale.h */,
+				B58E855C1A858CEC0089A15F /* MajorScale.m */,
+				B58E855E1A8590D80089A15F /* NaturalMinorScale.h */,
+				B58E855F1A8590D80089A15F /* NaturalMinorScale.m */,
+			);
+			name = Scales;
+			sourceTree = "<group>";
+		};
 		B5D0AAD81A7874A6001945E4 = {
 			isa = PBXGroup;
 			children = (
@@ -63,11 +83,14 @@
 		B5D0AAE31A7874A6001945E4 /* Supertonic */ = {
 			isa = PBXGroup;
 			children = (
+				B58E855A1A858CDE0089A15F /* Scales */,
 				B5D0AAE41A7874A6001945E4 /* main.m */,
 				B5D0AAEB1A7874D7001945E4 /* Note.h */,
 				B5D0AAEC1A7874D7001945E4 /* Note.m */,
 				B5D0AAEE1A787B98001945E4 /* Interval.h */,
 				B5D0AAEF1A787B98001945E4 /* Interval.m */,
+				B58E85571A858C5E0089A15F /* Scale.h */,
+				B58E85581A858C5E0089A15F /* Scale.m */,
 			);
 			path = Supertonic;
 			sourceTree = "<group>";
@@ -130,6 +153,9 @@
 			files = (
 				B5D0AAE51A7874A6001945E4 /* main.m in Sources */,
 				B5D0AAED1A7874D7001945E4 /* Note.m in Sources */,
+				B58E855D1A858CEC0089A15F /* MajorScale.m in Sources */,
+				B58E85591A858C5E0089A15F /* Scale.m in Sources */,
+				B58E85601A8590D80089A15F /* NaturalMinorScale.m in Sources */,
 				B5D0AAF01A787B98001945E4 /* Interval.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,6 +270,7 @@
 				B5D0AAEA1A7874A6001945E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

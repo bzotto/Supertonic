@@ -9,21 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "Note.h"
 #import "Interval.h"
+#import "MajorScale.h"
+#import "NaturalMinorScale.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        NSArray * notes = @[ @"C", @"Db", @"F", @"G", @"A", @"Cbb", @"E#"]; 
+        NSArray * notes = @[ @"C", @"Db", @"F", @"G", @"A"];
         for (NSString * notename in notes) {
             Note * note = [Note noteWithName:notename];
-            NSLog(@"%@ major: %@ %@ %@ %@ %@ %@ %@ %@", note.name,
-                  [[note noteByAddingInterval:[Interval intervalWithName:@"P1"]] name],
-                  [[note noteByAddingInterval:[Interval intervalWithName:@"M2"]] name],
-                  [[note noteByAddingInterval:[Interval intervalWithName:@"M3"]] name],
-                  [[note noteByAddingInterval:[Interval intervalWithName:@"P4"]] name],
-                  [[note noteByAddingInterval:[Interval intervalWithName:@"P5"]] name],
-                  [[note noteByAddingInterval:[Interval intervalWithName:@"M6"]] name],
-                  [[note noteByAddingInterval:[Interval intervalWithName:@"M7"]] name],
-                  [[note noteByAddingInterval:[Interval intervalWithName:@"P8"]] name]);
+            Scale * scale = [NaturalMinorScale scaleWithTonic:note];
+            NSMutableString * str = [NSMutableString string];
+            [str appendFormat:@"%@: ", scale.name];
+            for (int i = 0; i < scale.degreeCount; i++) {
+                [str appendFormat:@"%@ ", [scale noteForDegree:i].name];
+            }
+            NSLog(@"%@", str);
         }
     }
     return 0;
